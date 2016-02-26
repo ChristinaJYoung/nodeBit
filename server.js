@@ -21,7 +21,12 @@ app.get("/api/users", (req, res) => {
 
 // Main route after login
 app.get("/", (req, res) => {
-  res.render("index");
+  db.all(`SELECT * FROM UserWeight WHERE UserId = 1`,
+   (err, data) => {
+    if (err) throw err;
+    console.log(data);
+      res.render("index", {"data": data});
+  });
 });
 
 // route for entering weight data
@@ -35,7 +40,7 @@ app.post("/weightinput", (req, res) => {
   db.all(`INSERT INTO UserWeight VALUES(NULL, 1, ${req.body.weight}, date())`,
    (err, data) => {
     if (err) throw err;
-    res.send("saved yo weight");
+    res.redirect("/");
   });
 });
 
