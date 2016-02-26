@@ -4,12 +4,17 @@ const express = require("express");
 const app = express();
 const sqlite3 = require('sqlite3');
 const bodyParser = require("body-parser");
+const path = require("path");
 const db = new sqlite3.Database('lib/Nodebit.db');
 const PORT = process.env.PORT || 3000;
 
 app.set('view engine', 'jade');
 
+// body parser for forms
 app.use(bodyParser.urlencoded({extended: false}));
+
+// static files
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get("/api/users", (req, res) => {
 
@@ -18,6 +23,8 @@ app.get("/api/users", (req, res) => {
     res.send(data);
   });
 });
+
+//use public directory for static files
 
 // Main route after login
 app.get("/", (req, res) => {

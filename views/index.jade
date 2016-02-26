@@ -1,3 +1,14 @@
-h1 Hello Username
+extends ./header.jade
 
-h2 Yo weight is #{data[data.length-1].WEIGHT}
+block content 
+
+  h1 Hello
+  h2 Your weight is #{data[data.length-1].WEIGHT}
+
+  div#main.row
+    div.small-2.large-4.columns 
+      p example
+    div.small-2.large-4.columns 
+      p example
+    div.small-2.large-4.columns
+      p example
